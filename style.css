@@ -1,0 +1,21 @@
+/*
+Theme Name: Homebase
+Description: Home automation at it's finest, powered by WordPress
+Author: Rich Collier
+Author URI: https://rcollier.me
+*/
+
+.switch-zone-group .meta { 
+	display: inline-block;
+}
+
+.switch-zone { 
+	display: inline-block; 
+	width: 100px;
+	height: 60px;
+	background: #ccc;
+	padding: 10px;
+	margin: 2px;
+	text-align: center;
+	cursor: pointer;
+}
