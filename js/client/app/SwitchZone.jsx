@@ -38,15 +38,20 @@ class SwitchZone extends React.Component {
 			state: nextState.enabled
 		};
 
+		console.log( 'Payload sent:', params );
+
 		http.open( 'POST', url, true );
 		http.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 		http.onreadystatechange = function() {
 			if ( 4 === http.readyState && 200 === http.status ) {
 				var response = JSON.parse( http.responseText );
 				var state = response.data.state;
+
 				if ( response.data.state !== params.state ) {
 					that.setState( { broken: 1 } );
 				}
+
+				console.log( 'Payload response:', response.data );
 			}
 		}
 

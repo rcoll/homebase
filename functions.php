@@ -1,5 +1,7 @@
 <?php
 
+require_once( 'inc/settings.php' );
+
 function hb_get_js_config() {
 	return array( 
 		'apiurl' => esc_url( admin_url( 'admin-ajax.php' ) ), 
