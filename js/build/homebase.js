@@ -42,14 +42,12 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/*!*********************************!*\
-  !*** ./js/client/app/index.jsx ***!
-  \*********************************/
+/*!*************************!*\
+  !*** ./js/src/main.jsx ***!
+  \*************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
 	var _react = __webpack_require__(/*! react */ 1);
 	
@@ -57,56 +55,13 @@
 	
 	var _reactDom = __webpack_require__(/*! react-dom */ 34);
 	
-	var _SwitchZoneGroup = __webpack_require__(/*! ./SwitchZoneGroup.jsx */ 172);
+	var _App = __webpack_require__(/*! ./components/App.jsx */ 172);
 	
-	var _SwitchZoneGroup2 = _interopRequireDefault(_SwitchZoneGroup);
-	
-	var _SwitchZone = __webpack_require__(/*! ./SwitchZone.jsx */ 173);
-	
-	var _SwitchZone2 = _interopRequireDefault(_SwitchZone);
-	
-	var _MainMenu = __webpack_require__(/*! ./MainMenu.jsx */ 174);
-	
-	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+	var _App2 = _interopRequireDefault(_App);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var App = function (_React$Component) {
-		_inherits(App, _React$Component);
-	
-		function App() {
-			_classCallCheck(this, App);
-	
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
-		}
-	
-		_createClass(App, [{
-			key: 'render',
-			value: function render() {
-	
-				var content = homebase.switchZoneGroups.map(function (group) {
-					return _react2.default.createElement(_SwitchZoneGroup2.default, { data: group });
-				});
-	
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(_MainMenu2.default, null),
-					content
-				);
-			}
-		}]);
-	
-		return App;
-	}(_react2.default.Component);
-	
-	(0, _reactDom.render)(_react2.default.createElement(App, null), document.getElementById('app'));
+	(0, _reactDom.render)(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21990,9 +21945,9 @@
 
 /***/ },
 /* 172 */
-/*!*******************************************!*\
-  !*** ./js/client/app/SwitchZoneGroup.jsx ***!
-  \*******************************************/
+/*!***********************************!*\
+  !*** ./js/src/components/App.jsx ***!
+  \***********************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22007,7 +21962,78 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _SwitchZone = __webpack_require__(/*! ./SwitchZone.jsx */ 173);
+	var _reactDom = __webpack_require__(/*! react-dom */ 34);
+	
+	var _SwitchZoneGroup = __webpack_require__(/*! ./SwitchZoneGroup.jsx */ 173);
+	
+	var _SwitchZoneGroup2 = _interopRequireDefault(_SwitchZoneGroup);
+	
+	var _SwitchZone = __webpack_require__(/*! ./SwitchZone.jsx */ 174);
+	
+	var _SwitchZone2 = _interopRequireDefault(_SwitchZone);
+	
+	var _MainMenu = __webpack_require__(/*! ./MainMenu.jsx */ 175);
+	
+	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var App = function (_React$Component) {
+		_inherits(App, _React$Component);
+	
+		function App() {
+			_classCallCheck(this, App);
+	
+			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+		}
+	
+		_createClass(App, [{
+			key: 'render',
+			value: function render() {
+				var content = homebase.switchZoneGroups.map(function (group) {
+					return _react2.default.createElement(_SwitchZoneGroup2.default, { data: group });
+				});
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(_MainMenu2.default, null),
+					content
+				);
+			}
+		}]);
+	
+		return App;
+	}(_react2.default.Component);
+	
+	exports.default = App;
+
+/***/ },
+/* 173 */
+/*!***********************************************!*\
+  !*** ./js/src/components/SwitchZoneGroup.jsx ***!
+  \***********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _SwitchZone = __webpack_require__(/*! ./SwitchZone.jsx */ 174);
 	
 	var _SwitchZone2 = _interopRequireDefault(_SwitchZone);
 	
@@ -22099,10 +22125,10 @@
 	exports.default = SwitchZoneGroup;
 
 /***/ },
-/* 173 */
-/*!**************************************!*\
-  !*** ./js/client/app/SwitchZone.jsx ***!
-  \**************************************/
+/* 174 */
+/*!******************************************!*\
+  !*** ./js/src/components/SwitchZone.jsx ***!
+  \******************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22161,34 +22187,21 @@
 					return;
 				}
 	
-				var url = homebase.apiurl;
+				var url = homebase.apiurl + 'set/' + nextProps.data.id + '/' + nextState.enabled;
 				var http = new XMLHttpRequest();
 				var that = this;
 	
-				var params = {
-					action: 'hb_update_state',
-					id: nextProps.data.id,
-					state: nextState.enabled
-				};
+				console.log('REST API Request:', url);
 	
-				console.log('Payload sent:', params);
-	
-				http.open('POST', url, true);
+				http.open('GET', url, true);
 				http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 				http.onreadystatechange = function () {
 					if (4 === http.readyState && 200 === http.status) {
 						var response = JSON.parse(http.responseText);
-						var state = response.data.state;
-	
-						if (response.data.state !== params.state) {
-							that.setState({ broken: 1 });
-						}
-	
-						console.log('Payload response:', response.data);
 					}
 				};
 	
-				http.send(this.encodeQueryString(params));
+				http.send();
 			}
 		}, {
 			key: 'onClick',
@@ -22251,10 +22264,10 @@
 	exports.default = SwitchZone;
 
 /***/ },
-/* 174 */
-/*!************************************!*\
-  !*** ./js/client/app/MainMenu.jsx ***!
-  \************************************/
+/* 175 */
+/*!****************************************!*\
+  !*** ./js/src/components/MainMenu.jsx ***!
+  \****************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22269,7 +22282,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _MainMenuItem = __webpack_require__(/*! ./MainMenuItem.jsx */ 175);
+	var _MainMenuItem = __webpack_require__(/*! ./MainMenuItem.jsx */ 176);
 	
 	var _MainMenuItem2 = _interopRequireDefault(_MainMenuItem);
 	
@@ -22311,10 +22324,10 @@
 	exports.default = MainMenu;
 
 /***/ },
-/* 175 */
-/*!****************************************!*\
-  !*** ./js/client/app/MainMenuItem.jsx ***!
-  \****************************************/
+/* 176 */
+/*!********************************************!*\
+  !*** ./js/src/components/MainMenuItem.jsx ***!
+  \********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';

@@ -28,34 +28,21 @@ class SwitchZone extends React.Component {
 			return;
 		}
 
-		var url = homebase.apiurl;
+		var url = homebase.apiurl + 'set/' + nextProps.data.id + '/' + nextState.enabled;
 		var http = new XMLHttpRequest();
 		var that = this;
 
-		var params = {
-			action: 'hb_update_state', 
-			id: nextProps.data.id,
-			state: nextState.enabled
-		};
+		console.log( 'REST API Request:', url );
 
-		console.log( 'Payload sent:', params );
-
-		http.open( 'POST', url, true );
+		http.open( 'GET', url, true );
 		http.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 		http.onreadystatechange = function() {
 			if ( 4 === http.readyState && 200 === http.status ) {
 				var response = JSON.parse( http.responseText );
-				var state = response.data.state;
-
-				if ( response.data.state !== params.state ) {
-					that.setState( { broken: 1 } );
-				}
-
-				console.log( 'Payload response:', response.data );
 			}
 		}
 
-		http.send( this.encodeQueryString( params ) );
+		http.send();
 	}
 
 	onClick() {

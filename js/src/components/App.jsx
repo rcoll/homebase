@@ -1,13 +1,12 @@
-import React from 'react';
-import { render } from 'react-dom';
+import React           from 'react';
+import { render }      from 'react-dom';
 import SwitchZoneGroup from './SwitchZoneGroup.jsx';
-import SwitchZone from './SwitchZone.jsx';
-import MasterMenu from './MainMenu.jsx';
+import SwitchZone      from './SwitchZone.jsx';
+import MasterMenu      from './MainMenu.jsx';
 
 class App extends React.Component {
 
 	render() {
-
 		let content = homebase.switchZoneGroups.map( function( group ) {
 			return ( <SwitchZoneGroup data={ group } /> );
 		});
@@ -22,4 +21,4 @@ class App extends React.Component {
 	}
 }
 
-render( <App/>, document.getElementById( 'app' ) );
+export default App;
