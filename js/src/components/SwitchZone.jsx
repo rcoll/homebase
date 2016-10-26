@@ -32,8 +32,6 @@ class SwitchZone extends React.Component {
 		var http = new XMLHttpRequest();
 		var that = this;
 
-		console.log( 'REST API Request:', url );
-
 		http.open( 'GET', url, true );
 		http.setRequestHeader( 'Content-type', 'application/x-www-form-urlencoded' );
 		http.onreadystatechange = function() {
@@ -62,27 +60,24 @@ class SwitchZone extends React.Component {
 	}
 
 	render() {
-		let style = {};
+		var classes = [ 'switch-zone' ];
 
 		if ( 1 === this.state.enabled ) {
-			style.background = 'yellow';
-		} else {
-			style.background = '#ccc';
+			classes.push( 'active' );
 		}
 
 		if ( 1 === this.state.broken ) {
-			style.background = 'red';
+			classes.push( 'broken' );
 		}
 
-		let classname = "dashicons dashicons-" + this.props.data.icon;
-
-		let icon = ( <span className={ classname } /> );
+		let icon = ( <i className={ "fa fa-3x fa-" + this.props.data.icon } /> );
 
 		return ( 
-			<div style={ style } className="switch-zone" onClick={ this.onClick }>
-				<div className="label">{ this.props.data.label }</div>
+			<div className={ classes.join( ' ' ) } onClick={ this.onClick }>
 				<div className="icon">{ icon }</div>
-			</div> );
+				<div className="label">{ this.props.data.label }</div>
+			</div> 
+		);
 	}
 }
 

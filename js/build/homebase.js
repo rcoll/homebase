@@ -61,7 +61,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	(0, _reactDom.render)(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
+	window.app = (0, _reactDom.render)(_react2.default.createElement(_App2.default, null), document.getElementById('app'));
 
 /***/ },
 /* 1 */
@@ -21972,9 +21972,13 @@
 	
 	var _SwitchZone2 = _interopRequireDefault(_SwitchZone);
 	
-	var _MainMenu = __webpack_require__(/*! ./MainMenu.jsx */ 175);
+	var _ClimateControl = __webpack_require__(/*! ./ClimateControl.jsx */ 175);
 	
-	var _MainMenu2 = _interopRequireDefault(_MainMenu);
+	var _ClimateControl2 = _interopRequireDefault(_ClimateControl);
+	
+	var _AudioSettings = __webpack_require__(/*! ./AudioSettings.jsx */ 176);
+	
+	var _AudioSettings2 = _interopRequireDefault(_AudioSettings);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -21996,15 +22000,32 @@
 		_createClass(App, [{
 			key: 'render',
 			value: function render() {
-				var content = homebase.switchZoneGroups.map(function (group) {
-					return _react2.default.createElement(_SwitchZoneGroup2.default, { data: group });
+				var switchZoneGroups = homebase.switchZoneGroups.map(function (group) {
+					return _react2.default.createElement(_SwitchZoneGroup2.default, { ref: group.id, data: group });
 				});
+	
+				var climateControl = _react2.default.createElement(_ClimateControl2.default, { settingTemp: '77', currentTemp: '71' });
+	
+				var audioSettings = _react2.default.createElement(_AudioSettings2.default, null);
 	
 				return _react2.default.createElement(
 					'div',
 					null,
-					_react2.default.createElement(_MainMenu2.default, null),
-					content
+					_react2.default.createElement(
+						'div',
+						{ className: 'switches' },
+						switchZoneGroups
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'climate' },
+						climateControl
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'audio' },
+						audioSettings
+					)
 				);
 			}
 		}]);
@@ -22191,8 +22212,6 @@
 				var http = new XMLHttpRequest();
 				var that = this;
 	
-				console.log('REST API Request:', url);
-	
 				http.open('GET', url, true);
 				http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 				http.onreadystatechange = function () {
@@ -22225,34 +22244,30 @@
 		}, {
 			key: 'render',
 			value: function render() {
-				var style = {};
+				var classes = ['switch-zone'];
 	
 				if (1 === this.state.enabled) {
-					style.background = 'yellow';
-				} else {
-					style.background = '#ccc';
+					classes.push('active');
 				}
 	
 				if (1 === this.state.broken) {
-					style.background = 'red';
+					classes.push('broken');
 				}
 	
-				var classname = "dashicons dashicons-" + this.props.data.icon;
-	
-				var icon = _react2.default.createElement('span', { className: classname });
+				var icon = _react2.default.createElement('i', { className: "fa fa-3x fa-" + this.props.data.icon });
 	
 				return _react2.default.createElement(
 					'div',
-					{ style: style, className: 'switch-zone', onClick: this.onClick },
-					_react2.default.createElement(
-						'div',
-						{ className: 'label' },
-						this.props.data.label
-					),
+					{ className: classes.join(' '), onClick: this.onClick },
 					_react2.default.createElement(
 						'div',
 						{ className: 'icon' },
 						icon
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'label' },
+						this.props.data.label
 					)
 				);
 			}
@@ -22265,69 +22280,9 @@
 
 /***/ },
 /* 175 */
-/*!****************************************!*\
-  !*** ./js/src/components/MainMenu.jsx ***!
-  \****************************************/
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(/*! react */ 1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _MainMenuItem = __webpack_require__(/*! ./MainMenuItem.jsx */ 176);
-	
-	var _MainMenuItem2 = _interopRequireDefault(_MainMenuItem);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var MainMenu = function (_React$Component) {
-		_inherits(MainMenu, _React$Component);
-	
-		function MainMenu(props) {
-			_classCallCheck(this, MainMenu);
-	
-			return _possibleConstructorReturn(this, (MainMenu.__proto__ || Object.getPrototypeOf(MainMenu)).call(this, props));
-		}
-	
-		_createClass(MainMenu, [{
-			key: 'render',
-			value: function render() {
-				return _react2.default.createElement(
-					'ul',
-					{ className: 'main-menu' },
-					_react2.default.createElement(_MainMenuItem2.default, { hash: 'lighting', label: 'Lighting' }),
-					_react2.default.createElement(_MainMenuItem2.default, { hash: 'sound', label: 'Sound' }),
-					_react2.default.createElement(_MainMenuItem2.default, { hash: 'security', label: 'Security' }),
-					_react2.default.createElement(_MainMenuItem2.default, { hash: 'climate', label: 'Climate' }),
-					_react2.default.createElement(_MainMenuItem2.default, { hash: 'other', label: 'Other' })
-				);
-			}
-		}]);
-	
-		return MainMenu;
-	}(_react2.default.Component);
-	
-	exports.default = MainMenu;
-
-/***/ },
-/* 176 */
-/*!********************************************!*\
-  !*** ./js/src/components/MainMenuItem.jsx ***!
-  \********************************************/
+/*!**********************************************!*\
+  !*** ./js/src/components/ClimateControl.jsx ***!
+  \**********************************************/
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -22350,36 +22305,119 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var MainMenuItem = function (_React$Component) {
-		_inherits(MainMenuItem, _React$Component);
+	var ClimateControl = function (_React$Component) {
+		_inherits(ClimateControl, _React$Component);
 	
-		function MainMenuItem(props) {
-			_classCallCheck(this, MainMenuItem);
+		function ClimateControl(props) {
+			_classCallCheck(this, ClimateControl);
 	
-			var _this = _possibleConstructorReturn(this, (MainMenuItem.__proto__ || Object.getPrototypeOf(MainMenuItem)).call(this, props));
+			var _this = _possibleConstructorReturn(this, (ClimateControl.__proto__ || Object.getPrototypeOf(ClimateControl)).call(this, props));
 	
-			_this.onClick = _this.onClick.bind(_this);
+			_this.tempIncrease = _this.tempIncrease.bind(_this);
+			_this.tempDecrease = _this.tempDecrease.bind(_this);
 			return _this;
 		}
 	
-		_createClass(MainMenuItem, [{
-			key: 'onClick',
-			value: function onClick() {}
+		_createClass(ClimateControl, [{
+			key: 'tempIncrease',
+			value: function tempIncrease() {
+				console.log('foo');
+				this.props.settingTemp++;
+			}
+		}, {
+			key: 'tempDecrease',
+			value: function tempDecrease() {
+				console.log('bar');
+				this.props.settingTemp--;
+			}
 		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'li',
-					{ onClick: this.onClick },
-					this.props.label
+					'div',
+					{ className: 'climate-control' },
+					_react2.default.createElement(
+						'div',
+						{ className: 'temp temp-small' },
+						this.props.currentTemp,
+						'\xBAF'
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'temp temp-large' },
+						this.props.settingTemp,
+						'\xBAF'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.tempIncrease },
+						'+'
+					),
+					_react2.default.createElement(
+						'button',
+						{ onClick: this.tempDecrease },
+						'-'
+					)
 				);
 			}
 		}]);
 	
-		return MainMenuItem;
+		return ClimateControl;
 	}(_react2.default.Component);
 	
-	exports.default = MainMenuItem;
+	exports.default = ClimateControl;
+
+/***/ },
+/* 176 */
+/*!*********************************************!*\
+  !*** ./js/src/components/AudioSettings.jsx ***!
+  \*********************************************/
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(/*! react */ 1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var AudioSettings = function (_React$Component) {
+		_inherits(AudioSettings, _React$Component);
+	
+		function AudioSettings(props) {
+			_classCallCheck(this, AudioSettings);
+	
+			return _possibleConstructorReturn(this, (AudioSettings.__proto__ || Object.getPrototypeOf(AudioSettings)).call(this, props));
+		}
+	
+		_createClass(AudioSettings, [{
+			key: 'render',
+			value: function render() {
+				return _react2.default.createElement(
+					'div',
+					null,
+					'AudioSettings'
+				);
+			}
+		}]);
+	
+		return AudioSettings;
+	}(_react2.default.Component);
+	
+	exports.default = AudioSettings;
 
 /***/ }
 /******/ ]);

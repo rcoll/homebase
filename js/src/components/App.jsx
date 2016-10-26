@@ -2,20 +2,32 @@ import React           from 'react';
 import { render }      from 'react-dom';
 import SwitchZoneGroup from './SwitchZoneGroup.jsx';
 import SwitchZone      from './SwitchZone.jsx';
-import MasterMenu      from './MainMenu.jsx';
+import ClimateControl  from './ClimateControl.jsx';
+import AudioSettings   from './AudioSettings.jsx';
 
 class App extends React.Component {
 
 	render() {
-		let content = homebase.switchZoneGroups.map( function( group ) {
-			return ( <SwitchZoneGroup data={ group } /> );
+		let switchZoneGroups = homebase.switchZoneGroups.map( function( group ) {
+			return ( <SwitchZoneGroup ref={ group.id } data={ group } /> );
 		});
 
-		return (
+		let climateControl = ( <ClimateControl settingTemp="77" currentTemp="71" /> );
+
+		let audioSettings = ( <AudioSettings/> );
+
+		return ( 
 			<div>
-				<MasterMenu />
-				{ content }
-			</div>
+				<div className="switches">
+					{ switchZoneGroups }
+				</div>
+				<div className="climate">
+					{ climateControl }
+				</div>
+				<div className="audio">
+					{ audioSettings }
+				</div>
+			</div> 
 		);
 
 	}

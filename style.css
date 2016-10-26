@@ -5,17 +5,88 @@ Author: Rich Collier
 Author URI: https://rcollier.me
 */
 
-.switch-zone-group .meta { 
+a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:'';content:none}table{border-collapse:collapse;border-spacing:0}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+@import url('https://fonts.googleapis.com/css?family=Open%20Sans');
+
+body {
+	background: #4abdac;
+	color: #fff;
+	padding: 10px;
+}
+
+.switch-zone-group {
+	margin-bottom: 5px;
+	padding-bottom: 5px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.climate-control {
+	font-family: 'Open Sans', sans-serif;
+	font-size: 3em;
+
+}
+
+.climate-control .temp {
 	display: inline-block;
 }
 
-.switch-zone { 
+.switch-zone-group .controls button { 
+	display: block;
+	background: #dfdce3;
+	color: #999;
+	border: 0;
+	width: 100%;
+	margin-bottom: 3px;
+}
+
+.switch-zone-group .meta { 
+	display: inline-block;
+	vertical-align: bottom;
+	margin-right: 10px;
+	width: 80px;
+}
+
+.switch-zone-group .meta button { 
+	cursor: pointer; 
+}
+
+.switch-zone-group .meta button:focus {
+	outline: none;
+}
+
+.switch-zone-group .switch-zone { 
 	display: inline-block; 
 	width: 100px;
 	height: 60px;
-	background: #ccc;
+	background: #dfdce3;
+	color: #999;
 	padding: 10px;
 	margin: 2px;
 	text-align: center;
 	cursor: pointer;
+	text-shadow: 0 0 4px #fff;
+	font-size: 10px;
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+
+.switch-zone-group .switch-zone.active {
+	background: #f7b733;
+	color: #666;
+	text-shadow: initial !important;
+}
+
+.switch-zone-group .switch-zone.broken {
+	background: #fc4a1a !important;
+}
+
+.switch-zone-group .switch-zone .icon {
+	margin: 5px;
+	color: #bbb;
+}
+
+.switch-zone-group .switch-zone.active .icon {
+	color: #555;
 }
